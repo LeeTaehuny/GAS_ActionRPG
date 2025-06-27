@@ -3,3 +3,12 @@
 
 #include "Characters/ARHeroCharacter.h"
 
+// Debug
+#include "ARDebugHelper.h"
+
+void AARHeroCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Debug::Print(TEXT("Working"));
+}

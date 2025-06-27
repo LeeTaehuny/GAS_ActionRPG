@@ -14,4 +14,6 @@ class GAS_ACTIONRPG_API AARHeroCharacter : public AARBaseCharacter
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
 };
