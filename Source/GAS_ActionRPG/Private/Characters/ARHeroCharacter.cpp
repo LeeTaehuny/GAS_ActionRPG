@@ -6,6 +6,10 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "Components/Input/ARInputComponent.h"
+#include "DataAssets/Input/DataAsset_InputConfig.h"
+#include "ARGameplayTags.h"
 
 // Debug
 #include "ARDebugHelper.h"
@@ -35,9 +39,61 @@ AARHeroCharacter::AARHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
 }
 
+void AARHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config"));
+
+	ULocalPlayer* LocalPlayer = GetController<APlayerController>()->GetLocalPlayer();
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
+
+	check(Subsystem);
+
+	Subsystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext, 0);
+
+	UARInputComponent* ARInputComponent = CastChecked<UARInputComponent>(PlayerInputComponent);
+
+	ARInputComponent->BindNativeInputAction(InputConfigDataAsset, ARGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &AARHeroCharacter::Input_Move);
+	ARInputComponent->BindNativeInputAction(InputConfigDataAsset, ARGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &AARHeroCharacter::Input_Look);
+}
+
 void AARHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
 	Debug::Print(TEXT("Working"));
+}
+
+void AARHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
+{
+	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
+	const FRotator MovementRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f);
+
+	if (MovementVector.Y != 0.0f)
+	{
+		const FVector ForwardDirection = MovementRotation.RotateVector(FVector::ForwardVector);
+		AddMovementInput(ForwardDirection, MovementVector.Y);
+	}
+
+	if (MovementVector.X != 0.0f)
+	{
+		const FVector RightDirection = MovementRotation.RotateVector(FVector::RightVector);
+		AddMovementInput(RightDirection, MovementVector.X);
+	}
+}
+
+void AARHeroCharacter::Input_Look(const FInputActionValue& InputActionValue)
+{
+	const FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
+
+	if (LookAxisVector.X != 0.0f)
+	{
+		AddControllerYawInput(LookAxisVector.X);
+	}
+
+	if (LookAxisVector.Y != 0.0f)
+	{
+		AddControllerPitchInput(LookAxisVector.Y);
+	}
 }
