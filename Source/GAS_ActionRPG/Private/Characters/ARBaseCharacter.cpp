@@ -2,6 +2,9 @@
 
 
 #include "Characters/ARBaseCharacter.h"
+#include "AbilitySystem/ARAbilitySystemComponent.h"
+#include "AbilitySystem/ARAttributeSet.h"
+
 
 AARBaseCharacter::AARBaseCharacter()
 {
@@ -10,4 +13,22 @@ AARBaseCharacter::AARBaseCharacter()
 
 	// 데칼이 캐릭터 메쉬에 적용되지 않도록 설정
 	GetMesh()->bReceivesDecals = false;
+
+	ASC = CreateDefaultSubobject<UARAbilitySystemComponent>(TEXT("ASC"));
+	AS = CreateDefaultSubobject<UARAttributeSet>(TEXT("AS"));
+}
+
+UAbilitySystemComponent* AARBaseCharacter::GetAbilitySystemComponent() const
+{
+	return GetASC();
+}
+
+void AARBaseCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (ASC)
+	{
+		ASC->InitAbilityActorInfo(this, this);
+	}
 }

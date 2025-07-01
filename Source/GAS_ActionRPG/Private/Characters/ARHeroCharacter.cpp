@@ -10,6 +10,7 @@
 #include "Components/Input/ARInputComponent.h"
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "ARGameplayTags.h"
+#include "AbilitySystem/ARAbilitySystemComponent.h"
 
 // Debug
 #include "ARDebugHelper.h"
@@ -39,6 +40,18 @@ AARHeroCharacter::AARHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
 }
 
+void AARHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (ASC && AS)
+	{
+		const FString ASCText = FString::Printf(TEXT("Owner Actor : %s, Avatar Actor : %s"), *ASC->GetOwnerActor()->GetActorLabel(), *ASC->GetAvatarActor()->GetActorLabel());
+		Debug::Print(TEXT("Ability system component valid") + ASCText);
+		Debug::Print(TEXT("AttributeSet valid"));
+	}
+}
+
 void AARHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -61,8 +74,6 @@ void AARHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 void AARHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Debug::Print(TEXT("Working"));
 }
 
 void AARHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
