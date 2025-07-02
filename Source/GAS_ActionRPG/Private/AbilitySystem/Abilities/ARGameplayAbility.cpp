@@ -2,7 +2,7 @@
 
 
 #include "AbilitySystem/Abilities/ARGameplayAbility.h"
-#include "AbilitySystem/ARAbilitySystemComponent.h"\
+#include "AbilitySystem/ARAbilitySystemComponent.h"
 
 
 void UARGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
