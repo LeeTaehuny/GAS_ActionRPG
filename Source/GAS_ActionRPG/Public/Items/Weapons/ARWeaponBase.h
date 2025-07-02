@@ -24,5 +24,5 @@ protected:
 	UBoxComponent* WeaponCollisionBox;
 
 public:
-	FORCEINLINE UBoxComponent* GetWeaponCollisionBox() { return WeaponCollisionBox; }
+	FORCEINLINE UBoxComponent* GetWeaponCollisionBox() { return WeaponCollisionBox; } 
 };
