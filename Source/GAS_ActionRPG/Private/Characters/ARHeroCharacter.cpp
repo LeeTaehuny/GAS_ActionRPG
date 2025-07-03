@@ -11,6 +11,7 @@
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "ARGameplayTags.h"
 #include "AbilitySystem/ARAbilitySystemComponent.h"
+#include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
 
 // Debug
 #include "ARDebugHelper.h"
@@ -44,11 +45,12 @@ void AARHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if (ASC && AS)
+	if (!CharacterStartUpData.IsNull())
 	{
-		const FString ASCText = FString::Printf(TEXT("Owner Actor : %s, Avatar Actor : %s"), *ASC->GetOwnerActor()->GetActorLabel(), *ASC->GetAvatarActor()->GetActorLabel());
-		Debug::Print(TEXT("Ability system component valid") + ASCText);
-		Debug::Print(TEXT("AttributeSet valid"));
+		if (UDataAsset_HeroStartUpData* LoadedData = CharacterStartUpData.LoadSynchronous())
+		{
+			LoadedData->GiveToAbilitySystemComponent(ASC);
+		}
 	}
 }
 

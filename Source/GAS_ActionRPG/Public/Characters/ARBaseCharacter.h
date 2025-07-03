@@ -9,6 +9,7 @@
 
 class UARAbilitySystemComponent;
 class UARAttributeSet;
+class UDataAsset_HeroStartUpData;
 
 UCLASS()
 class GAS_ACTIONRPG_API AARBaseCharacter : public ACharacter, public IAbilitySystemInterface
@@ -32,6 +33,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	UARAttributeSet* AS;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
+	TSoftObjectPtr<UDataAsset_HeroStartUpData> CharacterStartUpData;
 
 public:
 	FORCEINLINE UARAbilitySystemComponent* GetASC() const { return ASC; }

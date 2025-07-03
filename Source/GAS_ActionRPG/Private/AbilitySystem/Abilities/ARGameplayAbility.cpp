@@ -11,7 +11,7 @@ void UARGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInf
 
 	if (AbilityActivationPolicy == EARAbilityActivationPolicy::OnGiven)
 	{
-		if (ActorInfo && Spec.IsActive())
+		if (ActorInfo && !Spec.IsActive())
 		{
 			ActorInfo->AbilitySystemComponent->TryActivateAbility(Spec.Handle);
 		}
