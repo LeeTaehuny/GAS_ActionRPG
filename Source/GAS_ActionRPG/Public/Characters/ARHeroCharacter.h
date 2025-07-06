@@ -9,6 +9,7 @@
 class USpringArmComponent;
 class UCameraComponent;
 class UDataAsset_InputConfig;
+class UARHeroCombatComponent;
 struct FInputActionValue;
 
 /**
@@ -18,7 +19,7 @@ UCLASS()
 class GAS_ACTIONRPG_API AARHeroCharacter : public AARBaseCharacter
 {
 	GENERATED_BODY()
-	
+
 public:
 	AARHeroCharacter();
 
@@ -33,22 +34,28 @@ protected:
 private:
 
 #pragma region Components
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	USpringArmComponent* CameraBoom;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	UCameraComponent* FollowCamera;
+		USpringArmComponent* CameraBoom;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+		UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+		UARHeroCombatComponent* HeroCombatComponent;
 
 #pragma endregion
 
 #pragma region Inputs
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
-	UDataAsset_InputConfig* InputConfigDataAsset;
+		UDataAsset_InputConfig* InputConfigDataAsset;
 
 	void Input_Move(const FInputActionValue& InputActionValue);
 	void Input_Look(const FInputActionValue& InputActionValue);
 
 #pragma endregion
+
+public:
+	FORCEINLINE UARHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
 };
