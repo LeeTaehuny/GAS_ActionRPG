@@ -6,6 +6,8 @@
 #include "Abilities/GameplayAbility.h"
 #include "ARGameplayAbility.generated.h"
 
+class UARPawnCombatComponent;
+
 UENUM(BlueprintType)
 enum class EARAbilityActivationPolicy : uint8
 {
@@ -29,4 +31,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "ARAbility")
 	EARAbilityActivationPolicy AbilityActivationPolicy = EARAbilityActivationPolicy::OnTriggered;
+
+	UFUNCTION(BlueprintPure, Category = "Ability")
+	UARPawnCombatComponent* GetPawnCombatComponentFromActorInfo() const;
 };

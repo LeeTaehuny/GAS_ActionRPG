@@ -13,5 +13,5 @@ UCLASS()
 class GAS_ACTIONRPG_API UARHeroCombatComponent : public UARPawnCombatComponent
 {
 	GENERATED_BODY()
-	
+
 };

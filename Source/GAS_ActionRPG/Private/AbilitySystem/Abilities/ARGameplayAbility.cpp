@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/Abilities/ARGameplayAbility.h"
 #include "AbilitySystem/ARAbilitySystemComponent.h"
+#include "Components/Combat/ARPawnCombatComponent.h"
 
 
 void UARGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
@@ -29,4 +30,9 @@ void UARGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, con
 			ActorInfo->AbilitySystemComponent->ClearAbility(Handle);
 		}
 	}
+}
+
+UARPawnCombatComponent* UARGameplayAbility::GetPawnCombatComponentFromActorInfo() const
+{
+	return GetAvatarActorFromActorInfo()->FindComponentByClass<UARPawnCombatComponent>();
 }
