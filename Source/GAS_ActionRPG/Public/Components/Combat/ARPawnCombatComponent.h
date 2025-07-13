@@ -17,7 +17,6 @@ class GAS_ACTIONRPG_API UARPawnCombatComponent : public UARExtensionComponentBas
 {
 	GENERATED_BODY()
 	
-
 public:
 	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
 	void RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister, AARWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon = false);
