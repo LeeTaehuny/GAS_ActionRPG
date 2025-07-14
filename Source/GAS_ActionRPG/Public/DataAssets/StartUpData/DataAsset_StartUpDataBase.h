@@ -21,10 +21,10 @@ public:
 	virtual void GiveToAbilitySystemComponent(UARAbilitySystemComponent* InASC, int32 ApplyLevel = 1);
 	
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "StartUp")
+	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
 	TArray<TSubclassOf<UARGameplayAbility>> ActivateOnGivenAbilities;
 
-	UPROPERTY(EditDefaultsOnly, Category = "StartUp")
+	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
 	TArray<TSubclassOf<UARGameplayAbility>> ReactiveAbilities;
 
 	void GrantAbilities(const TArray<TSubclassOf<UARGameplayAbility>>& InAbilitiesToGive, UARAbilitySystemComponent* InASC, int32 ApplyLevel = 1);
