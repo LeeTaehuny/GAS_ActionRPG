@@ -74,6 +74,8 @@ void AARHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	ARInputComponent->BindNativeInputAction(InputConfigDataAsset, ARGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &AARHeroCharacter::Input_Move);
 	ARInputComponent->BindNativeInputAction(InputConfigDataAsset, ARGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &AARHeroCharacter::Input_Look);
+
+	ARInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &AARHeroCharacter::Input_AbilityInputPressed, &AARHeroCharacter::Input_AbilityInputReleased);
 }
 
 void AARHeroCharacter::BeginPlay()
@@ -112,4 +114,14 @@ void AARHeroCharacter::Input_Look(const FInputActionValue& InputActionValue)
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AARHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+{
+	ASC->OnAbilityInputPressed(InInputTag);
+}
+
+void AARHeroCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
+{
+	ASC->OnAbilityInputReleased(InInputTag);
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
+#include "GameplayTagContainer.h"
 #include "ARAbilitySystemComponent.generated.h"
 
 /**
@@ -14,4 +15,7 @@ class GAS_ACTIONRPG_API UARAbilitySystemComponent : public UAbilitySystemCompone
 {
 	GENERATED_BODY()
 	
+public:
+	void OnAbilityInputPressed(const FGameplayTag& InInputTag);
+	void OnAbilityInputReleased(const FGameplayTag& InInputTag);
 };
