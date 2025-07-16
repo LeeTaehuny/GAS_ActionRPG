@@ -6,6 +6,8 @@
 #include "AnimInstances/ARBaseAnimInstance.h"
 #include "ARHeroLinkedAnimLayer.generated.h"
 
+class UARHeroAnimInstance;
+
 /**
  * 
  */
@@ -14,4 +16,7 @@ class GAS_ACTIONRPG_API UARHeroLinkedAnimLayer : public UARBaseAnimInstance
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION(BlueprintPure, meta = (BlueprintThreadSafe))
+	UARHeroAnimInstance* GetHeroAnimInstance() const;
 };
