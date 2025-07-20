@@ -2,9 +2,28 @@
 
 #pragma once
 
+#include "GameplayTagContainer.h"
 #include "ARStructTypes.generated.h"
 
 class UARHeroLinkedAnimLayer;
+class UARGameplayAbility;
+class UInputMappingContext;
+
+USTRUCT(BlueprintType)
+struct FARHeroAbilitySet
+{
+	GENERATED_BODY()
+
+	public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
+	FGameplayTag InputTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UARGameplayAbility> AbilityToGrant;
+
+public:
+	bool IsValid() const;
+};
 
 USTRUCT(BlueprintType)
 struct FARHeroWeaponData
@@ -14,4 +33,10 @@ struct FARHeroWeaponData
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UARHeroLinkedAnimLayer> WeaponAnimLayerToLink;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputMappingContext* WeaponInputMappingContext;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
+	TArray<FARHeroAbilitySet> DefaultWeaponAbilities;
 };

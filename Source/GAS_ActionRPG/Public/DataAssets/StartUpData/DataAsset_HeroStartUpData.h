@@ -4,24 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
-#include "GameplayTagContainer.h"
+#include "ActionRPGTypes/ARStructTypes.h"
 #include "DataAsset_HeroStartUpData.generated.h"
-
-USTRUCT(BlueprintType)
-struct FARHeroAbilitySet
-{
-	GENERATED_BODY()
-	
-public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
-	FGameplayTag InputTag;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UARGameplayAbility> AbilityToGrant;
-
-public:
-	bool IsValid() const;
-};
 
 /**
  * 

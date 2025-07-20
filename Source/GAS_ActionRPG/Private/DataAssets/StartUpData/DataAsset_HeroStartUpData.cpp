@@ -5,11 +5,6 @@
 #include "AbilitySystem/ARAbilitySystemComponent.h"
 #include "AbilitySystem/Abilities/ARGameplayAbility.h"
 
-bool FARHeroAbilitySet::IsValid() const
-{
-	return InputTag.IsValid() && AbilityToGrant;
-}
-
 void UDataAsset_HeroStartUpData::GiveToAbilitySystemComponent(UARAbilitySystemComponent* InASC, int32 ApplyLevel)
 {
 	Super::GiveToAbilitySystemComponent(InASC, ApplyLevel);
