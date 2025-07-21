@@ -18,16 +18,16 @@ class GAS_ACTIONRPG_API UARPawnCombatComponent : public UARExtensionComponentBas
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister, AARWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon = false);
 
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	UFUNCTION(BlueprintCallable, Category = "Combat")
 	AARWeaponBase* GetCharacterCarriedWeaponByTag(FGameplayTag InWeaponTagToGet) const;
 
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	UFUNCTION(BlueprintCallable, Category = "Combat")
 	AARWeaponBase* GetCharacterEquippedWeaponByTag(FGameplayTag InWeaponTagToGet) const;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Warrior|Combat")
+	UPROPERTY(BlueprintReadWrite, Category = "Combat")
 	FGameplayTag CurrentEquippedWeaponTag;
 
 private:
