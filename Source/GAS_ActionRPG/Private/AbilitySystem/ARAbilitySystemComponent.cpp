@@ -38,3 +38,18 @@ void UARAbilitySystemComponent::GrantHeroWeaponAbilities(const TArray<FARHeroAbi
 		OutGrantedAbilitySpecHandle.AddUnique(GiveAbility(AbilitySpec));
 	}
 }
+
+void UARAbilitySystemComponent::RemoveGrantedHeroWeaponAbilities(UPARAM(ref)TArray<FGameplayAbilitySpecHandle>& InSpecHandlesToRemove)
+{
+	if (InSpecHandlesToRemove.IsEmpty()) return;
+
+	for (const FGameplayAbilitySpecHandle& SpecHandle : InSpecHandlesToRemove)
+	{
+		if (SpecHandle.IsValid())
+		{
+			ClearAbility(SpecHandle);
+		}
+	}
+
+	InSpecHandlesToRemove.Empty();
+}

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Items/Weapons/ARWeaponBase.h"
+#include "GameplayAbilitySpecHandle.h"
 #include "ActionRPGTypes/ARStructTypes.h"
 #include "ARHeroWeapon.generated.h"
 
@@ -18,4 +19,14 @@ class GAS_ACTIONRPG_API AARHeroWeapon : public AARWeaponBase
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeaponData")
 	FARHeroWeaponData HeroWeaponData;
+
+	UFUNCTION(BlueprintCallable)
+	void AssignGrantedAbilitySpecHandles(const TArray<FGameplayAbilitySpecHandle>& InSpecHandles);
+
+	UFUNCTION(BlueprintPure)
+	TArray<FGameplayAbilitySpecHandle> GetGrantedAbilitySpecHandles() const;
+
+private:
+	UPROPERTY()
+	TArray<FGameplayAbilitySpecHandle> GrantedAbilitySpecHandles;
 };
