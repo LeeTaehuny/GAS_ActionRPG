@@ -50,6 +50,6 @@ void UARAbilitySystemComponent::RemoveGrantedHeroWeaponAbilities(UPARAM(ref)TArr
 			ClearAbility(SpecHandle);
 		}
 	}
-
+	
 	InSpecHandlesToRemove.Empty();
 }
