@@ -2,7 +2,7 @@
 
 
 #include "ActionRPGTypes/ARStructTypes.h"
-#include "AbilitySystem/Abilities/ARGameplayAbility.h"
+#include "AbilitySystem/Abilities/ARHeroGameplayAbility.h"
 
 bool FARHeroAbilitySet::IsValid() const
 {
