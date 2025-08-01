@@ -7,6 +7,7 @@
 #include "AREnemyCharacter.generated.h"
 
 class UAREnemyCombatComponent;
+class UDataAsset_EnemyStartUpData;
 
 /**
  * 
@@ -23,6 +24,13 @@ public:
 	FORCEINLINE UAREnemyCombatComponent* GetEnemyCombatComponent() const { return EnemyCombatComponent; }
 
 protected:
+	//~ Begin APawn Interface
+	virtual void PossessedBy(AController* NewController) override;
+	//~ End APawn Interface
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
 	UAREnemyCombatComponent* EnemyCombatComponent;
+
+private:
+	void InitEnemyStartUpData();
 };

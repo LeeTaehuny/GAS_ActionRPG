@@ -50,7 +50,7 @@ void AARHeroCharacter::PossessedBy(AController* NewController)
 
 	if (!CharacterStartUpData.IsNull())
 	{
-		if (UDataAsset_HeroStartUpData* LoadedData = CharacterStartUpData.LoadSynchronous())
+		if (UDataAsset_StartUpDataBase* LoadedData = CharacterStartUpData.LoadSynchronous())
 		{
 			LoadedData->GiveToAbilitySystemComponent(ASC);
 		}
