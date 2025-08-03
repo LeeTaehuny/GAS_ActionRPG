@@ -19,7 +19,7 @@ void UDataAsset_EnemyStartUpData::GiveToAbilitySystemComponent(UARAbilitySystemC
 			Spec.SourceObject = InASC->GetAvatarActor();
 			Spec.Level = ApplyLevel;
 
-			InASC->GiveAbility(Spec);
+			InASC->GiveAbility(Spec);//
 		}
 	}
 }

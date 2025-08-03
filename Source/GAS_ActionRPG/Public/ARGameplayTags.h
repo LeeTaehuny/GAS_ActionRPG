@@ -27,4 +27,8 @@ namespace ARGameplayTags
 	GAS_ACTIONRPG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_UnEquip_Axe);
 
 	GAS_ACTIONRPG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_JumpToFinisher);
+
+	/** Enemy Tags **/
+	GAS_ACTIONRPG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon);
+
 }
