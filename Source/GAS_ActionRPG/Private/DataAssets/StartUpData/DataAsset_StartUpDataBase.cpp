@@ -11,6 +11,22 @@ void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UARAbilitySystemCo
 
 	GrantAbilities(ActivateOnGivenAbilities, InASC, ApplyLevel);
 	GrantAbilities(ReactiveAbilities, InASC, ApplyLevel);
+
+	// GameplayEffects 적용
+	if (!StartUpGameplayEffects.IsEmpty())
+	{
+		for (const TSubclassOf<UGameplayEffect>& EffectClass : StartUpGameplayEffects)
+		{
+			if (!EffectClass) continue;
+
+			// CDO 불러오기
+			// * Unreal Engine에서 클래스가 처음 로드될 때 자동으로 생성되는 기본 객체
+			// * 인스턴스를 새로 만들지 않고도, 그 클래스의 기본 설정을 참조 가능
+			UGameplayEffect* EffectCDO = EffectClass->GetDefaultObject<UGameplayEffect>();
+
+			InASC->ApplyGameplayEffectToSelf(EffectCDO, ApplyLevel, InASC->MakeEffectContext());
+		}
+	}
 }
 
 void UDataAsset_StartUpDataBase::GrantAbilities(const TArray<TSubclassOf<UARGameplayAbility>>& InAbilitiesToGive, UARAbilitySystemComponent* InASC, int32 ApplyLevel)
